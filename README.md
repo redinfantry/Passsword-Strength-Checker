@@ -11,7 +11,7 @@ This is a simple Python program for checking the strength of passwords. It inclu
   - Special characters (e.g., !@#$%^&*()_+-=[]{};:',.<>?).
   - No consecutive numbers (e.g., "123" is not allowed).
 
-- Utilizes a list of common passwords from a text file to check against common passwords.
+- Utilizes a list of common and breached passwords from a text file to check against common passwords.
 - Customized error messages for different password conditions.
 - User-friendly and easy to use.
 
