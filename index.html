@@ -1,27 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <title>Password Strength Checker</title>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
-    <!--Stylesheet-->
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="wrapper">
-        <div class="container">
-            <input type="password" id="password" oninput="strengthChecker()">
-            <span id="toggle" onclick="toggle()">
-                <i class="fas fa-eye"></i>
-            </span>
-            <div id="strength-bar"></div>
-        </div>
-        <p id="msg"></p>
-    </div>
-    <!--Script-->
-    <script src="script.js"></script>
+    <h1>Password Strength Checker</h1>
+    <form>
+        <label for="password">Enter a Password:</label>
+        <input type="password" id="password" onkeyup="checkPasswordStrength()">
+        <p id="passwordStrength"></p>
+    </form>
+
+    <script>
+        function checkPasswordStrength() {
+            const password = document.getElementById('password').value;
+            const strengthText = document.getElementById('passwordStrength');
+
+            // Check for minimum length
+            if (password.length < 13) {
+                strengthText.textContent = 'Password should be at least 13 characters long.';
+                return;
+            }
+
+            // Check for uppercase and lowercase letters
+            const hasUppercase = /[A-Z]/.test(password);
+            const hasLowercase = /[a-z]/.test(password);
+
+            if (!hasUppercase || !hasLowercase) {
+                strengthText.textContent = 'Password should have at least one uppercase and one lowercase letter.';
+                return;
+            }
+
+            // Check for special characters
+            const hasSpecialChars = /[!@#$%^&*()_+\-=\[\]{};':",.<>?]/.test(password);
+            if (!hasSpecialChars) {
+                strengthText.textContent = 'Password should have at least one special character.';
+                return;
+            }
+
+            // Check for consecutive numbers
+            if (/(?:\d{2,})/.test(password)) {
+                strengthText.textContent = 'Password should not have consecutive numbers.';
+                return;
+            }
+
+            strengthText.textContent = 'Password is strong!';
+        }
+    </script>
 </body>
 </html>
